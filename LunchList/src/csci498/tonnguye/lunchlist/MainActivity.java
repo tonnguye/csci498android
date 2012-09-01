@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.ArrayAdapter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 	
 	List<Restaurant> model = new ArrayList<Restaurant>();
+	ArrayAdapter<Restaurant> adapter = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,8 @@ public class MainActivity extends Activity {
 		Button save = (Button)findViewById(R.id.save);
 
 		save.setOnClickListener(onSave);
+		
+		addAList();
 	}
 	private View.OnClickListener onSave=new View.OnClickListener() {
 		public void onClick(View v) {
@@ -32,6 +37,8 @@ public class MainActivity extends Activity {
 			r.setAddress(address.getText().toString());
 			
 			addAlotOfRadioButtons(r);
+			
+			adapter.add(r);
 			
 		}
 	};
@@ -50,7 +57,15 @@ public class MainActivity extends Activity {
 		        r.setType("delivery");
 		        break;
 		}
-		
+	}
+	
+	private void addAList(){
+		ListView list=(ListView)findViewById(R.id.restaurants);
+	    
+	    adapter=new ArrayAdapter<Restaurant>(this,
+	                       android.R.layout.simple_list_item_1,
+	                       model);
+	    list.setAdapter(adapter);
 	}
 	
 }
