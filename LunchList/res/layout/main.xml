@@ -9,17 +9,17 @@
         
   	<TableLayout android:id="@+id/details"
     	android:layout_width="match_parent"
-    	android:layout_height=""
+    	android:layout_height="wrap_content"
     	android:layout_alignParentBottom="true"
     	android:stretchColumns="1"
 		android:shrinkColumns="1" >
 	
 	<TableRow>
       <TextView 
-          android:textSyle = "Bold"
-          android:textColor = "#FF0000"
-          android:text = "Name:" />
-      <EditText android:id = "@+id/name" />
+          android:textStyle="bold"
+          android:textColor="#FF0000"
+          android:text="Name:" />
+      <EditText android:id="@+id/name" />
     </TableRow>
     
     <TableRow>
