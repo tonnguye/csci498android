@@ -1,11 +1,13 @@
 package csci498.tonnguye.lunchlist;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ArrayAdapter;
 import java.util.List;
@@ -16,6 +18,10 @@ public class MainActivity extends Activity {
 	
 	List<Restaurant> model = new ArrayList<Restaurant>();
 	ArrayAdapter<Restaurant> adapter = null;
+	RadioGroup types = null;
+	RadioButton button;
+	
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,13 @@ public class MainActivity extends Activity {
 		save.setOnClickListener(onSave);
 		
 		addAList();
+		
+		types = (RadioGroup)findViewById(R.id.types);
+		button = new RadioButton(this);
+		button.setText("Amazing Button");
+		types.addView(button);
+		
+		
 	}
 	private View.OnClickListener onSave=new View.OnClickListener() {
 		public void onClick(View v) {
@@ -45,7 +58,6 @@ public class MainActivity extends Activity {
 	
 	private void addAlotOfRadioButtons(Restaurant r){
 		
-		RadioGroup types = (RadioGroup)findViewById(R.id.types);
 		switch (types.getCheckedRadioButtonId()) {
 		      case R.id.sit_down:
 		        r.setType("sit_down");
