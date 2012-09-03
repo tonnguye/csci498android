@@ -11,8 +11,11 @@
 		android:shrinkColumns="1" >
 	
 	<TableRow>
-      <TextView android:text="Name:" />
-      <EditText android:id="@+id/name" />
+      <TextView 
+          
+          android:textColor = "#FF0000"
+          android:text = "Name:" />
+      <EditText android:id = "@+id/name" />
     </TableRow>
     
     <TableRow>
