@@ -1,23 +1,26 @@
 package csci498.tonnguye.lunchlist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ArrayAdapter;
-import java.util.List;
-import java.util.ArrayList;
+import android.widget.Spinner;
 
 
 public class MainActivity extends Activity {
 	
 	List<Restaurant> model = new ArrayList<Restaurant>();
-	ArrayAdapter<Restaurant> adapter = null;
+	List<String> addresses = new ArrayList<String>();
+	RestaurantAdapter adapter = null;
+	ArrayAdapter<String> addressAdapter = null;
 	RadioGroup types = null;
 	RadioButton button;
 	
@@ -40,11 +43,12 @@ public class MainActivity extends Activity {
 		
 		
 	}
-	private View.OnClickListener onSave=new View.OnClickListener() {
+	private View.OnClickListener onSave = new View.OnClickListener() {
 		public void onClick(View v) {
 			Restaurant r = new Restaurant();
 			EditText name = (EditText)findViewById(R.id.name);
-			EditText address = (EditText)findViewById(R.id.addr);
+			AutoCompleteTextView address = (AutoCompleteTextView)findViewById(R.id.addr);
+			address.setAdapter(addressAdapter);
 			
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
@@ -52,9 +56,11 @@ public class MainActivity extends Activity {
 			addAlotOfRadioButtons(r);
 			
 			adapter.add(r);
+			addressAdapter.add(address.getText().toString());
 			
 		}
 	};
+	
 	
 	private void addAlotOfRadioButtons(Restaurant r){
 		
@@ -72,12 +78,21 @@ public class MainActivity extends Activity {
 	}
 	
 	private void addAList(){
-		ListView list=(ListView)findViewById(R.id.restaurants);
+		Spinner list=(Spinner)findViewById(R.id.restaurants);
 	    
-	    adapter=new ArrayAdapter<Restaurant>(this,
-	                       android.R.layout.simple_list_item_1,
-	                       model);
+	    adapter=new RestaurantAdapter();
 	    list.setAdapter(adapter);
+	    
+	    addressAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, addresses);
+	}
+	
+	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
+		RestaurantAdapter() {
+			super(MainActivity.this,
+					android.R.layout.simple_list_item_1,
+					model);
+		}
 	}
 	
 }
