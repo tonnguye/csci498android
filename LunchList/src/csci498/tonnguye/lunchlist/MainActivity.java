@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,8 @@ public class MainActivity extends Activity {
 			adapter.add(r);
 			addressAdapter.add(address.getText().toString());
 			
+			//adapter.getItemViewType(adapter.getViewTypeCount());
+			
 		}
 	};
 	
@@ -121,6 +124,8 @@ public class MainActivity extends Activity {
 			holder.populateFrom(model.get(position));
 			return(row);
 		}
+		
+		
 	}
 	
 	static class RestaurantHolder {
@@ -138,6 +143,10 @@ public class MainActivity extends Activity {
 		void populateFrom(Restaurant r) {
 			name.setText(r.getName());
 			address.setText(r.getAddress());
+			
+			if(r.getName().equals("Sushi")) {
+				name.setTextColor(Color.BLUE);
+			}
 			
 			if (r.getType().equals("sit_down")) {
 				icon.setImageResource(R.drawable.ball_red);
