@@ -45,6 +45,13 @@
 
                     <AutoCompleteTextView android:id="@+id/addr" />
                 </TableRow>
+                
+                <TableRow >
+                    
+                    <DatePicker android:id="@+id/date"
+                        		android:calendarViewShown="false" />"
+                    
+                </TableRow>
 
                 <TableRow>
 
