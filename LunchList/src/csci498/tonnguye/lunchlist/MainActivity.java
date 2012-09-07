@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android.app.TabActivity;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,15 +20,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 
-public class MainActivity extends TabActivity {
+public class MainActivity extends Activity {
 
 	List<Restaurant> model = new ArrayList<Restaurant>();
 	List<String> addresses = new ArrayList<String>();
 	RadioButton button;
+	ViewFlipper flipper;
 	RestaurantAdapter adapter           = null;
 	ArrayAdapter<String> addressAdapter = null;
 	RadioGroup types                    = null;
@@ -54,7 +55,7 @@ public class MainActivity extends TabActivity {
 				types.check(R.id.delivery);
 			}
 
-			getTabHost().setCurrentTab(1);
+			//getTabHost().setCurrentTab(1);
 		}
 	};
 
@@ -65,11 +66,13 @@ public class MainActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		Button save = (Button)findViewById(R.id.save);
-
+		Button flip = (Button)findViewById(R.id.flip);
+		
 		name=(EditText)findViewById(R.id.name);
 		address=(EditText)findViewById(R.id.addr);
 		date=(DatePicker)findViewById(R.id.date);
 		types=(RadioGroup)findViewById(R.id.types);
+		flipper=(ViewFlipper)findViewById(R.id.flipper);
 
 		save.setOnClickListener(onSave);
 		addAList();
@@ -78,13 +81,18 @@ public class MainActivity extends TabActivity {
 		button = new RadioButton(this);
 		button.setText("Amazing Button");
 		types.addView(button);
-		addTabs();
-
-
-
-
-
+		//addTabs();
+		
 	}
+	
+	private View.OnClickListener onFlip = new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			flipper.setDisplayedChild((flipper.getDisplayedChild() + 1) % 2);
+			
+		}
+	};
 	private View.OnClickListener onSave = new View.OnClickListener() {
 		public void onClick(View v) {
 
@@ -107,19 +115,19 @@ public class MainActivity extends TabActivity {
 		}
 	};
 
-	private void addTabs(){
-		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
-		spec.setContent(R.id.restaurants);
-		spec.setIndicator("List", getResources()
-				.getDrawable(R.drawable.list));
-		getTabHost().addTab(spec);
-		spec=getTabHost().newTabSpec("tag2");
-		spec.setContent(R.id.details);
-		spec.setIndicator("Details", getResources()
-				.getDrawable(R.drawable.restaurant));
-		getTabHost().addTab(spec);
-		getTabHost().setCurrentTab(0);
-	}
+//	private void addTabs(){
+//		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+//		spec.setContent(R.id.restaurants);
+//		spec.setIndicator("List", getResources()
+//				.getDrawable(R.drawable.list));
+//		getTabHost().addTab(spec);
+//		spec=getTabHost().newTabSpec("tag2");
+//		spec.setContent(R.id.details);
+//		spec.setIndicator("Details", getResources()
+//				.getDrawable(R.drawable.restaurant));
+//		getTabHost().addTab(spec);
+//		getTabHost().setCurrentTab(0);
+//	}
 
 
 	private void addAlotOfRadioButtons(Restaurant r){
