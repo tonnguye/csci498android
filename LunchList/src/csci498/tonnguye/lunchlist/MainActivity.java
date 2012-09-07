@@ -3,24 +3,26 @@ package csci498.tonnguye.lunchlist;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
+import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends TabActivity {
 	
 	List<Restaurant> model = new ArrayList<Restaurant>();
 	List<String> addresses = new ArrayList<String>();
@@ -29,6 +31,13 @@ public class MainActivity extends Activity {
 	RadioGroup types = null;
 	RadioButton button;
 	
+	private AdapterView.OnItemClickListener onListClick=new
+			AdapterView.OnItemClickListener() {
+		public void onItemClick(AdapterView<?> parent,
+				View view, int position,
+				long id) {
+		}
+	};
 	
 
 	@Override
@@ -45,6 +54,10 @@ public class MainActivity extends Activity {
 		button = new RadioButton(this);
 		button.setText("Amazing Button");
 		types.addView(button);
+		addTabs();
+		
+		
+		
 		
 		
 	}
@@ -64,10 +77,24 @@ public class MainActivity extends Activity {
 			adapter.add(r);
 			addressAdapter.add(address.getText().toString());
 			
-			//adapter.getItemViewType(adapter.getViewTypeCount());
+		
 			
 		}
 	};
+	
+	private void addTabs(){
+		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+		spec.setContent(R.id.restaurants);
+		spec.setIndicator("List", getResources()
+				.getDrawable(R.drawable.list));
+		getTabHost().addTab(spec);
+		spec=getTabHost().newTabSpec("tag2");
+		spec.setContent(R.id.details);
+		spec.setIndicator("Details", getResources()
+				.getDrawable(R.drawable.restaurant));
+		getTabHost().addTab(spec);
+		getTabHost().setCurrentTab(0);
+	}
 	
 	
 	private void addAlotOfRadioButtons(Restaurant r){
@@ -89,9 +116,10 @@ public class MainActivity extends Activity {
 	
 	private void addAList(){
 		
-		Spinner list=(Spinner)findViewById(R.id.restaurants);
+		ListView list=(ListView)findViewById(R.id.restaurants);
 	    adapter=new RestaurantAdapter();
 	    list.setAdapter(adapter);
+	    list.setOnItemClickListener(onListClick);
 	    
 	    addressAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, addresses);
 	}
