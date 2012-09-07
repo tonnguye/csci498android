@@ -1,13 +1,10 @@
 package csci498.tonnguye.lunchlist;
 
-import java.util.Date;
-
 public class Restaurant {
 	
 	private String name = "";
 	private String address = "";
 	private String type = "";
-	private Date date;
 	
 	public String toString(){
 		return getName();
@@ -35,14 +32,6 @@ public class Restaurant {
 	
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	
 }
