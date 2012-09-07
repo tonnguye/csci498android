@@ -50,6 +50,8 @@ public class MainActivity extends TabActivity {
 			else {
 				types.check(R.id.delivery);
 			}
+			
+			getTabHost().setCurrentTab(1);
 		}
 	};
 
