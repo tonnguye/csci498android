@@ -84,6 +84,7 @@ public class LunchList extends TabActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		new MenuInflater(this).inflate(R.menu.option, menu);
+		
 		return(super.onCreateOptionsMenu(menu));
 
 	}
