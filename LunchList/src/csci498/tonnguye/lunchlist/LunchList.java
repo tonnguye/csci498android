@@ -3,6 +3,7 @@ package csci498.tonnguye.lunchlist;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -94,7 +95,12 @@ public class LunchList extends TabActivity {
 			if (current!=null) {
 				message=current.getNotes();
 			}
-			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+			alertDialogBuilder.setTitle("Notes");
+			alertDialogBuilder.setMessage(message);
+			alertDialogBuilder.create().show();
+			
 			return(true);
 		}
 		return(super.onOptionsItemSelected(item));
