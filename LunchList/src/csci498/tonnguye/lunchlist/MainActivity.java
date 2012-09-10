@@ -31,7 +31,9 @@ public class MainActivity extends TabActivity {
 	RadioGroup types = null;
 	RadioButton button;
 	EditText name=null;
-	EditText address=null;	
+	EditText address=null;
+	EditText note = null;
+	
 	
 	private AdapterView.OnItemClickListener onListClick=new
 			AdapterView.OnItemClickListener() {
@@ -41,6 +43,7 @@ public class MainActivity extends TabActivity {
 			Restaurant r=model.get(position);
 			name.setText(r.getName());
 			address.setText(r.getAddress());
+			note.setText(r.getNotes());
 			if (r.getType().equals("sit_down")) {
 				types.check(R.id.sit_down);
 			}
@@ -65,7 +68,9 @@ public class MainActivity extends TabActivity {
 		
 		name=(EditText)findViewById(R.id.name);
 		address=(EditText)findViewById(R.id.addr);
+		note=(EditText)findViewById(R.id.notes);
 		types=(RadioGroup)findViewById(R.id.types);
+		
 
 		save.setOnClickListener(onSave);
 		addAList();
@@ -90,6 +95,7 @@ public class MainActivity extends TabActivity {
 		
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
+			r.setNotes(note.getText().toString());
 			
 			addAlotOfRadioButtons(r);
 			
