@@ -218,19 +218,19 @@ public class LunchList extends TabActivity {
 			icon    = (ImageView)row.findViewById(R.id.icon);
 		}
 
-		void populateFrom(Restaurant current) {
-			name.setText(current.getName());
-			address.setText(current.getAddress());
+		void populateFrom(Restaurant r) {
+			name.setText(r.getName());
+			address.setText(r.getAddress());
 
-			if(current.getName().equals("Sushi")) {
+			if(r.getName().equals("Sushi")) {
 				name.setTextColor(Color.BLUE);
 			}
 
-			if (current.getType().equals("sit_down")) {
+			if (r.getType().equals("sit_down")) {
 				icon.setImageResource(R.drawable.ball_red);
 			}
 
-			else if (current.getType().equals("take_out")) {
+			else if (r.getType().equals("take_out")) {
 				icon.setImageResource(R.drawable.ball_yellow);
 			}
 
