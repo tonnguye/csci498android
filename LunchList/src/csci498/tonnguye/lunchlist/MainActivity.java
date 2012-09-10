@@ -7,6 +7,8 @@ import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,101 +25,86 @@ import android.widget.TextView;
 
 
 public class MainActivity extends TabActivity {
-	
+	Restaurant r = new Restaurant();
 	List<Restaurant> model = new ArrayList<Restaurant>();
 	List<String> addresses = new ArrayList<String>();
 	RestaurantAdapter adapter = null;
 	ArrayAdapter<String> addressAdapter = null;
+	
 	RadioGroup types = null;
-	RadioButton button;
-	EditText name=null;
-	EditText address=null;
-	EditText note = null;
+	EditText name    = null;
+	EditText address = null;
+	EditText note    = null;
 	
 	
 	private AdapterView.OnItemClickListener onListClick=new
 			AdapterView.OnItemClickListener() {
-		public void onItemClick(AdapterView<?> parent,
-				View view, int position,
-				long id) {
+
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Restaurant r=model.get(position);
 			name.setText(r.getName());
 			address.setText(r.getAddress());
 			note.setText(r.getNotes());
+			
 			if (r.getType().equals("sit_down")) {
 				types.check(R.id.sit_down);
 			}
+			
 			else if (r.getType().equals("take_out")) {
 				types.check(R.id.take_out);
 			}
+			
 			else {
 				types.check(R.id.delivery);
 			}
-			
+
 			getTabHost().setCurrentTab(1);
+			
 		}
 	};
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		Button save = (Button)findViewById(R.id.save);
 		
-		name=(EditText)findViewById(R.id.name);
-		address=(EditText)findViewById(R.id.addr);
-		note=(EditText)findViewById(R.id.notes);
-		types=(RadioGroup)findViewById(R.id.types);
-		
-
 		save.setOnClickListener(onSave);
+		addInformation();
 		addAList();
-		
-		types = (RadioGroup)findViewById(R.id.types);
-		button = new RadioButton(this);
-		button.setText("Amazing Button");
-		types.addView(button);
 		addTabs();
 		
-		
-		
-		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(this).inflate(R.menu.option, menu);
+		return(super.onCreateOptionsMenu(menu));
 		
 	}
+	
 	private View.OnClickListener onSave = new View.OnClickListener() {
 		public void onClick(View v) {
-			
-			Restaurant r = new Restaurant();
-			EditText name = (EditText)findViewById(R.id.name);
-			AutoCompleteTextView address = (AutoCompleteTextView)findViewById(R.id.addr);
-		
-			r.setName(name.getText().toString());
-			r.setAddress(address.getText().toString());
-			r.setNotes(note.getText().toString());
-			
+			setInformation();
 			addAlotOfRadioButtons(r);
 			
+			AutoCompleteTextView address = (AutoCompleteTextView)findViewById(R.id.addr);
 			address.setAdapter(addressAdapter);
 			adapter.add(r);
 			addressAdapter.add(address.getText().toString());
-			
 		
-			
 		}
 	};
 	
 	private void addTabs(){
 		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
 		spec.setContent(R.id.restaurants);
-		spec.setIndicator("List", getResources()
-				.getDrawable(R.drawable.list));
+		spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
 		getTabHost().addTab(spec);
 		spec=getTabHost().newTabSpec("tag2");
 		spec.setContent(R.id.details);
-		spec.setIndicator("Details", getResources()
-				.getDrawable(R.drawable.restaurant));
+		spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
 		getTabHost().addTab(spec);
 		getTabHost().setCurrentTab(0);
 	}
@@ -139,6 +126,25 @@ public class MainActivity extends TabActivity {
 		        break;
 		}
 	}
+	
+	private void addInformation() {
+		name    = (EditText)findViewById(R.id.name);
+		address = (EditText)findViewById(R.id.addr);
+		note    = (EditText)findViewById(R.id.notes);
+		types   = (RadioGroup)findViewById(R.id.types);
+		
+	}
+	
+	private void setInformation() {
+		EditText name = (EditText)findViewById(R.id.name);
+		
+	
+		r.setName(name.getText().toString());
+		r.setAddress(address.getText().toString());
+		r.setNotes(note.getText().toString());
+		
+	}
+
 	
 	private void addAList(){
 		
