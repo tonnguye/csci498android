@@ -23,7 +23,6 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class LunchList extends TabActivity {
