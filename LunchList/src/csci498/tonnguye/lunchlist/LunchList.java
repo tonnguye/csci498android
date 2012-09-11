@@ -104,6 +104,14 @@ public class LunchList extends TabActivity {
 			
 			return(true);
 		}
+		if (item.getItemId() == R.id.switchable) {
+			if (getTabHost().getCurrentTab() == 0 ) {
+				getTabHost().setCurrentTab(1);
+			}else {
+				getTabHost().setCurrentTab(0);
+			}
+	
+		}
 		return(super.onOptionsItemSelected(item));
 	}
 

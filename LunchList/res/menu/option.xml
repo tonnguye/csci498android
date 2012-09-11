@@ -3,5 +3,7 @@
     <item android:id="@+id/toast" 
           android:icon="@drawable/toast" 
           android:title="Raise Toast" />
+    <item android:id="@+id/switchable" 
+          android:title="Switch" />
     
 </menu>
