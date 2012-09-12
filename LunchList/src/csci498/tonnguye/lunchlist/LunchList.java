@@ -6,12 +6,14 @@ import java.util.List;
 import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -38,10 +40,10 @@ public class LunchList extends TabActivity {
 	EditText name      = null;
 	EditText address   = null;
 	EditText note      = null;
+	int progress;
 
 
-	private AdapterView.OnItemClickListener onListClick=new
-			AdapterView.OnItemClickListener() {
+	private AdapterView.OnItemClickListener onListClick=new AdapterView.OnItemClickListener() {
 
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Restaurant r = model.get(position);
@@ -66,10 +68,22 @@ public class LunchList extends TabActivity {
 		}
 	};
 
+	private void doSomeLongWork(final int incr) {
+		SystemClock.sleep(250); // should be something more useful!
+	}
 
+	private Runnable longTask=new Runnable() {
+		public void run() {
+			for (int i=0;i<20;i++) {
+				doSomeLongWork(500);
+			}
+		}
+	};
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.main);
 		Button save = (Button)findViewById(R.id.save);
 
@@ -96,6 +110,9 @@ public class LunchList extends TabActivity {
 			}
 			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 			return(true);
+		}
+		else if (item.getItemId() == R.id.run) {
+			new Thread(longTask).start();
 		}
 		return(super.onOptionsItemSelected(item));
 	}
