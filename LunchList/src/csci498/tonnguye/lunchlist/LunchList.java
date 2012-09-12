@@ -69,6 +69,12 @@ public class LunchList extends TabActivity {
 	};
 
 	private void doSomeLongWork(final int incr) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				progress+=incr;
+				setProgress(progress);
+			}
+		});
 		SystemClock.sleep(250); // should be something more useful!
 	}
 
@@ -77,6 +83,12 @@ public class LunchList extends TabActivity {
 			for (int i=0;i<20;i++) {
 				doSomeLongWork(500);
 			}
+			
+			runOnUiThread(new Runnable() {
+				public void run() {
+					setProgressBarVisibility(false);
+				}
+			});
 		}
 	};
 	
@@ -112,6 +124,8 @@ public class LunchList extends TabActivity {
 			return(true);
 		}
 		else if (item.getItemId() == R.id.run) {
+			setProgressBarVisibility(true);
+			progress=0;
 			new Thread(longTask).start();
 		}
 		return(super.onOptionsItemSelected(item));
