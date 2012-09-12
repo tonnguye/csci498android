@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,6 +36,7 @@ public class LunchList extends TabActivity {
 
 	RestaurantAdapter adapter = null;
 	ArrayAdapter<String> addressAdapter = null;
+	Handler handler = new Handler();
 
 	Restaurant current = null;
 	RadioGroup types   = null;
@@ -69,7 +72,7 @@ public class LunchList extends TabActivity {
 	};
 
 	private void doSomeLongWork(final int incr) {
-		runOnUiThread(new Runnable() {
+		handler.post(new Runnable() {
 			public void run() {
 				progress+=incr;
 				setProgress(progress);
@@ -84,9 +87,12 @@ public class LunchList extends TabActivity {
 				doSomeLongWork(500);
 			}
 			
-			runOnUiThread(new Runnable() {
+			handler.post(new Runnable() {
 				public void run() {
 					setProgressBarVisibility(false);
+					name.setText("Milk is great!");
+					
+					
 				}
 			});
 		}
