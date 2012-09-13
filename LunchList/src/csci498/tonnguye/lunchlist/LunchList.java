@@ -7,7 +7,6 @@ import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,6 +26,7 @@ import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.concurrent.*;
 
 
 public class LunchList extends TabActivity {
@@ -37,7 +37,8 @@ public class LunchList extends TabActivity {
 	RestaurantAdapter adapter = null;
 	ArrayAdapter<String> addressAdapter = null;
 	Handler handler = new Handler();
-
+	BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>(500);
+	
 	Restaurant current = null;
 	RadioGroup types   = null;
 	EditText name      = null;
@@ -81,10 +82,35 @@ public class LunchList extends TabActivity {
 		SystemClock.sleep(250); // should be something more useful!
 	}
 
+	
+	private Runnable fakeJob = new Runnable() {
+		public void run() {
+			while(true){				
+					queue.add(longTask);
+					try {
+						new Thread(queue.take()).start();
+						
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		}
+	};
+	
+	private Runnable killJob = new Runnable() {
+		public void run() {
+			Thread.interrupted();
+			
+		}
+	};
+
 	private Runnable longTask=new Runnable() {
 		public void run() {
 			for (int i=0;i<20;i++) {
 				doSomeLongWork(500);
+				 
+				
 			}
 			
 			handler.post(new Runnable() {
@@ -104,6 +130,9 @@ public class LunchList extends TabActivity {
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.main);
 		Button save = (Button)findViewById(R.id.save);
+		
+		//new Thread(longTask).start();
+		new Thread(fakeJob).start();
 
 		save.setOnClickListener(onSave);
 		addInformation();
@@ -132,7 +161,7 @@ public class LunchList extends TabActivity {
 		else if (item.getItemId() == R.id.run) {
 			setProgressBarVisibility(true);
 			progress=0;
-			new Thread(longTask).start();
+			new Thread(killJob).start();
 		}
 		return(super.onOptionsItemSelected(item));
 	}
