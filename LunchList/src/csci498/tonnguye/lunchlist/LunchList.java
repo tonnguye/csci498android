@@ -41,8 +41,6 @@ public class LunchList extends TabActivity {
 	EditText name      = null;
 	EditText address   = null;
 	EditText note      = null;
-	AtomicBoolean isActive = new AtomicBoolean(true);
-	int progress;
 
 
 	private AdapterView.OnItemClickListener onListClick=new AdapterView.OnItemClickListener() {
@@ -69,60 +67,10 @@ public class LunchList extends TabActivity {
 
 		}
 	};
-
-	private void doSomeLongWork(final int incr) {
-		runOnUiThread(new Runnable() {
-			public void run() {
-				progress+=incr;
-				setProgress(progress);
-			}
-		});
-		SystemClock.sleep(250); // should be something more useful!
-	}
-
-	private Runnable longTask=new Runnable() {
-		public void run() {
-			for (int i = progress;
-					i < 10000 && isActive.get();
-					i+=200) {
-				doSomeLongWork(200);
-			}
-
-			if(isActive.get()){
-				runOnUiThread(new Runnable() {
-					public void run() {
-						setProgressBarVisibility(false);
-						progress = 0;
-					}
-				});
-			}
-		}
-	};
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		isActive.set(false);
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		isActive.set(true);
-		if (progress>0) {
-			startWork();
-		}
-	}
-	
-	private void startWork() {
-		setProgressBarVisibility(true);
-		new Thread(longTask).start();
-	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.main);
 		Button save = (Button)findViewById(R.id.save);
 
@@ -132,31 +80,6 @@ public class LunchList extends TabActivity {
 		addTabs();
 
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		new MenuInflater(this).inflate(R.menu.option, menu);
-		return(super.onCreateOptionsMenu(menu));
-
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId()==R.id.toast) {
-			String message="No restaurant selected";
-			if (current!=null) {
-				message=current.getNotes();
-			}
-			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-			return(true);
-		}
-		else if (item.getItemId() == R.id.run) {
-			startWork();
-			return(true);
-		}
-		return(super.onOptionsItemSelected(item));
-	}
-
 
 	private View.OnClickListener onSave = new View.OnClickListener() {
 		public void onClick(View v) {
