@@ -51,7 +51,7 @@
                             android:paddingRight="2dip"
                             android:text="Address:" />
 
-                        <AutoCompleteTextView
+                        <EditText
                             android:id="@+id/addr"
                             android:maxWidth="140sp" />
                     </TableRow>
