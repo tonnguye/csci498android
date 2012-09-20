@@ -2,14 +2,15 @@ package csci498.tonnguye.lunchlist;
 
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
 import android.widget.AdapterView;
-import android.widget.CursorAdapter;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -93,22 +94,27 @@ public class LunchList extends TabActivity {
 	private AdapterView.OnItemClickListener onListClick=new
 			AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			model.moveToPosition(position);
-			name.setText(helper.getName(model));
-			address.setText(helper.getAddress(model));
-			notes.setText(helper.getNotes(model));
+			Intent i = new Intent(LunchList.this, DetailForm.class);
 			
-			if (helper.getType(model).equals("sit_down")) {
-				types.check(R.id.sit_down);
-			}
-			else if (helper.getType(model).equals("take_out")) {
-				types.check(R.id.take_out);
-			}
-			else {
-				types.check(R.id.delivery);
-			}
+			startActivity(i);
 			
-			getTabHost().setCurrentTab(1);
+			
+//			model.moveToPosition(position);
+//			name.setText(helper.getName(model));
+//			address.setText(helper.getAddress(model));
+//			notes.setText(helper.getNotes(model));
+//			
+//			if (helper.getType(model).equals("sit_down")) {
+//				types.check(R.id.sit_down);
+//			}
+//			else if (helper.getType(model).equals("take_out")) {
+//				types.check(R.id.take_out);
+//			}
+//			else {
+//				types.check(R.id.delivery);
+//			}
+//			
+//			getTabHost().setCurrentTab(1);
 		
 		}
 	};
