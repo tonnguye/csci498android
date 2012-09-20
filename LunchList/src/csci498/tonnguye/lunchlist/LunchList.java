@@ -1,6 +1,6 @@
 package csci498.tonnguye.lunchlist;
 
-import android.app.TabActivity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,7 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-public class LunchList extends TabActivity {
+public class LunchList extends ListActivity {
 	Cursor model=null;
 	RestaurantAdapter adapter=null;
 	EditText name=null;
@@ -27,41 +27,26 @@ public class LunchList extends TabActivity {
 	RadioGroup types=null;
 	RestaurantHelper helper=null;
 	
+	public final static String ID_EXTRA="csci498.tonnguye.lunchlist._ID";
+	
+	@Override
+	public void onListItemClick(ListView list, View view int position, long id) {
+		Intent i = new Intent(LunchList.this, DetailForm.class);
+		
+		i.putExtra(ID_EXTRA, String.valueOf(id));
+		startActivity(i);
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		helper=new RestaurantHelper(this);
-		name=(EditText)findViewById(R.id.name);
-		address=(EditText)findViewById(R.id.addr);
-		notes=(EditText)findViewById(R.id.notes);
-		types=(RadioGroup)findViewById(R.id.types);
-		
-		Button save=(Button)findViewById(R.id.save);
-		save.setOnClickListener(onSave);
-		ListView list=(ListView)findViewById(R.id.restaurants);
-		
+		helper=new RestaurantHelper(this);	
 		model=helper.getAll();
 		startManagingCursor(model);
 		adapter=new RestaurantAdapter(model);
-		list.setAdapter(adapter);
+		setListAdapter(adapter);
 		
-		TabHost.TabSpec spec=getTabHost().newTabSpec("tag1");
-		
-		spec.setContent(R.id.restaurants);
-		spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
-		
-		getTabHost().addTab(spec);
-		
-		spec=getTabHost().newTabSpec("tag2");
-		spec.setContent(R.id.details);
-		spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
-		
-		getTabHost().addTab(spec);
-		getTabHost().setCurrentTab(0);
-		
-		list.setOnItemClickListener(onListClick);
 	}
 	
 	@Override

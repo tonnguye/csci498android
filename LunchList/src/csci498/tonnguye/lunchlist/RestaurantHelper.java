@@ -15,6 +15,12 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, SCHEMA_VERSION);
 	}
 	
+	public Cursor getById(String id) {
+		String[] args = {id};
+		
+		return(getReadableDatabase().rawQuery("SELECT _id,  name, address, types, notes FROM restaurants WHERE _ID = ?", args));
+	}
+	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE restaurants (_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, address TEXT, type TEXT, notes TEXT);");
