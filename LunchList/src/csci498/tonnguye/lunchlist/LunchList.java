@@ -6,16 +6,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.widget.TabHost;
 import android.widget.TextView;
 
 public class LunchList extends ListActivity {
@@ -29,6 +30,25 @@ public class LunchList extends ListActivity {
 	
 	public final static String ID_EXTRA="csci498.tonnguye.lunchlist._ID";
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(this).inflate(R.menu.option, menu);
+		
+		return(super.onCreateOptionsMenu(menu));
+		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.add) {
+			startActivity(new Intent(LunchList.this, DetailForm.class));
+			
+			return(true);
+			
+		}
+		return(super.onOptionsItemSelected(item));
+		
+	}
 	@Override
 	public void onListItemClick(ListView list, View view int position, long id) {
 		Intent i = new Intent(LunchList.this, DetailForm.class);
