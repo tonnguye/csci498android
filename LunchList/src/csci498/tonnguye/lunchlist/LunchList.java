@@ -49,13 +49,7 @@ public class LunchList extends ListActivity {
 		return(super.onOptionsItemSelected(item));
 		
 	}
-	@Override
-	public void onListItemClick(ListView list, View view int position, long id) {
-		Intent i = new Intent(LunchList.this, DetailForm.class);
-		
-		i.putExtra(ID_EXTRA, String.valueOf(id));
-		startActivity(i);
-	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,8 +66,18 @@ public class LunchList extends ListActivity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		
 		helper.close();
 	}
+	
+	@Override
+	public void onListItemClick(ListView list, View view, int position, long id) {
+		Intent i = new Intent(LunchList.this, DetailForm.class);
+		
+		i.putExtra(ID_EXTRA, String.valueOf(id));
+		startActivity(i);
+	}
+
 	
 	private View.OnClickListener onSave=new View.OnClickListener() {
 		public void onClick(View v) {
@@ -102,24 +106,6 @@ public class LunchList extends ListActivity {
 			Intent i = new Intent(LunchList.this, DetailForm.class);
 			
 			startActivity(i);
-			
-			
-//			model.moveToPosition(position);
-//			name.setText(helper.getName(model));
-//			address.setText(helper.getAddress(model));
-//			notes.setText(helper.getNotes(model));
-//			
-//			if (helper.getType(model).equals("sit_down")) {
-//				types.check(R.id.sit_down);
-//			}
-//			else if (helper.getType(model).equals("take_out")) {
-//				types.check(R.id.take_out);
-//			}
-//			else {
-//				types.check(R.id.delivery);
-//			}
-//			
-//			getTabHost().setCurrentTab(1);
 		
 		}
 	};
