@@ -2,8 +2,8 @@ package csci498.tonnguye.lunchlist;
 
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
+import android.database.Cursor;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,26 +12,26 @@ import android.widget.TextView;
 
 
 public class DetailForm extends Activity {
-	EditText name = null;
-	EditText address = null;
-	EditText notes = null;
-	RadioGroup types = null;
-	RestaurantHelper helper = null;
+	EditText name=null;
+	EditText address=null;
+	EditText notes=null;
+	RadioGroup types=null;
+	RestaurantHelper helper=null;
 	String restaurantId = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main); 
+		setContentView(R.layout.main);
 		
-		helper = new RestaurantHelper(this);
+		helper=new RestaurantHelper(this);
 		
-		name = (EditText)findViewById(R.id.name);
-		address = (EditText)findViewById(R.id.addr);
-		notes = (EditText)findViewById(R.id.notes);
-		types = (RadioGroup)findViewById(R.id.types);
+		name=(EditText)findViewById(R.id.name);
+		address=(EditText)findViewById(R.id.addr);
+		notes=(EditText)findViewById(R.id.notes);
+		types=(RadioGroup)findViewById(R.id.types);
 		
-		Button save = (Button)findViewById(R.id.save);
+		Button save=(Button)findViewById(R.id.save);
 		
 		save.setOnClickListener(onSave);
 		
@@ -40,7 +40,6 @@ public class DetailForm extends Activity {
 		if(restaurantId != null) {
 			load();
 		}
-		
 	}
 	
 	private void load() {
@@ -49,12 +48,12 @@ public class DetailForm extends Activity {
 		c.moveToFirst();
 		name.setText(helper.getName(c));
 		address.setText(helper.getAddress(c));
-		notes.setText(helper.getName(c));
+		notes.setText(helper.getNotes(c));
 		
-		if(helper.getType(c).equals("sit_down")) {
+		if (helper.getType(c).equals("sit_down")) {
 			types.check(R.id.sit_down);
 		}
-		else if(helper.getType(c).equals("take_out")) {
+		else if (helper.getType(c).equals("take_out")) {
 			types.check(R.id.take_out);
 		}
 		else {
@@ -62,7 +61,6 @@ public class DetailForm extends Activity {
 		}
 		
 		c.close();
-				
 	}
 	
 	@Override
@@ -74,7 +72,7 @@ public class DetailForm extends Activity {
 	
 	private View.OnClickListener onSave=new View.OnClickListener() {
 		public void onClick(View v) {
-			String type=null;
+			String type = null;
 			
 			switch (types.getCheckedRadioButtonId()) {
 			case R.id.sit_down:
@@ -87,22 +85,6 @@ public class DetailForm extends Activity {
 				type="delivery";
 				break;
 			}
-			
-			if (restaurantId == null) {
-				helper.insert(name.getText().toString(), 
-						address.getText().toString(),
-						type, 
-						notes.getText().toString());
-			}
-			else {
-				helper.update(restaurantId, name.getText().toString(),
-						address.getText().toString(), 
-						type,
-						notes.getText().toString());
-			}
-			finish();
-			
 		}
 	};
-
 }

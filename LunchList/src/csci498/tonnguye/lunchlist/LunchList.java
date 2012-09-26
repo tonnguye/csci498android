@@ -6,17 +6,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 public class LunchList extends ListActivity {
@@ -27,35 +26,14 @@ public class LunchList extends ListActivity {
 	EditText notes=null;
 	RadioGroup types=null;
 	RestaurantHelper helper=null;
-	
-	public final static String ID_EXTRA="csci498.tonnguye.lunchlist._ID";
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		new MenuInflater(this).inflate(R.menu.option, menu);
-		
-		return(super.onCreateOptionsMenu(menu));
-		
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.add) {
-			startActivity(new Intent(LunchList.this, DetailForm.class));
-			
-			return(true);
-			
-		}
-		return(super.onOptionsItemSelected(item));
-		
-	}
+	public final static String ID_EXTRA = "csci498.tonnguye.lunchlist._ID";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		helper=new RestaurantHelper(this);	
+		helper=new RestaurantHelper(this);
 		model=helper.getAll();
 		startManagingCursor(model);
 		adapter=new RestaurantAdapter(model);
@@ -66,7 +44,6 @@ public class LunchList extends ListActivity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
 		helper.close();
 	}
 	
@@ -77,38 +54,6 @@ public class LunchList extends ListActivity {
 		i.putExtra(ID_EXTRA, String.valueOf(id));
 		startActivity(i);
 	}
-
-	
-	private View.OnClickListener onSave=new View.OnClickListener() {
-		public void onClick(View v) {
-			String type=null;
-			
-			switch (types.getCheckedRadioButtonId()) {
-			case R.id.sit_down:
-				type="sit_down";
-				break;
-			case R.id.take_out:
-				type="take_out";
-				break;
-			case R.id.delivery:
-				type="delivery";
-				break;
-			}
-			
-			helper.insert(name.getText().toString(), address.getText().toString(), type, notes.getText().toString());
-			model.requery();
-		}
-	};
-	
-	private AdapterView.OnItemClickListener onListClick=new
-			AdapterView.OnItemClickListener() {
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			Intent i = new Intent(LunchList.this, DetailForm.class);
-			
-			startActivity(i);
-		
-		}
-	};
 	
 	class RestaurantAdapter extends CursorAdapter {
 		RestaurantAdapter(Cursor c) {
