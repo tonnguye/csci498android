@@ -46,7 +46,23 @@ public class LunchList extends ListActivity {
 		adapter=new RestaurantAdapter(model);
 		setListAdapter(adapter);
 		
+		prefs.registerOnSharedPreferenceChangeListener(prefListener);
 	}
+	
+	private SharedPreferences.OnSharedPreferenceChangeListener prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+		public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, String key) {
+			if (key.equals("sort_order")) {
+			}
+		}
+	};
+		
+		@Override
+		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+				String key) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
