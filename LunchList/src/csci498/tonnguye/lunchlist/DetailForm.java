@@ -20,6 +20,10 @@ public class DetailForm extends Activity {
 	String restaurantId = null;
 	
 	@Override
+	public void onSaveInstanceState(Bundle state) {
+		super.onSaveInstanceState(state);
+	}
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_form);
