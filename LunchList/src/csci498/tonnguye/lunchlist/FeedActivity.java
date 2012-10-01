@@ -16,8 +16,32 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class FeedActivity extends ListActivity {
-	static final String FEED_URL = "csci498.tonnguye.FEED_URL";
+	public static final String FEED_URL = "csci498.tonnguye.lunchlist.FEED_URL";
 	private InstanceState state = null;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		state = (InstanceState)getLastNonConfigurationInstance();
+		
+		if (state == null) {
+			state = new InstanceState();
+			state.task.execute(getIntent().getStringExtra(FEED_URL));
+			
+		}
+		else {
+			if (state.task != null) {
+				state.task.attach(this);
+				
+			}
+			
+			if (state.feed != null) {
+				setFeed(state.feed);
+				
+			}
+		}
+	}
 	
 	private static class FeedTask extends AsyncTask<String, Void, RSSFeed> {
 		private RSSReader reader = new RSSReader();
@@ -38,7 +62,7 @@ public class FeedActivity extends ListActivity {
 
 		@Override
 		public RSSFeed doInBackground(String... urls) {
-			RSSFeed result=null;
+			RSSFeed result = null;
 
 			try {
 				result = reader.load(urls[0]);
@@ -105,30 +129,6 @@ public class FeedActivity extends ListActivity {
 		RSSFeed feed = null;
 		FeedTask task = null;
 		
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		state = (InstanceState)getLastNonConfigurationInstance();
-		
-		if (state == null) {
-			state = new InstanceState();
-			state.task.execute(getIntent().getStringExtra(FEED_URL));
-			
-		}
-		else {
-			if (state.task != null) {
-				state.task.attach(this);
-				
-			}
-			
-			if (state.feed != null) {
-				setFeed(state.feed);
-				
-			}
-		}
 	}
 	
 	@Override
