@@ -1,11 +1,15 @@
 package csci498.tonnguye.lunchlist;
 
+import java.util.Properties;
+
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.AlertDialog.Builder;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -20,6 +24,11 @@ public class FeedActivity extends ListActivity {
 		
 		@Override
 		public Void doInBackground(String... urls) {
+			Properties systemSettings = System.getProperties();
+			
+			systemSettings.put("http.proxyHost", "your.proxy.host.here");
+			systemSettings.put("http.proxyPort", "8080"); // use actual proxy port
+			
 			try {
 				DefaultHttpClient client = new DefaultHttpClient();
 				HttpGet getMethod = new HttpGet(urls[0]);
@@ -45,5 +54,11 @@ public class FeedActivity extends ListActivity {
 				activity.goBlooey(e);
 			}
 		}
+	}
+	
+	private void goBlooey(Throwable t) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+		builder.setTitle("Exeception!").setMessage(t.toString()).setPositiveButton("OK", null).show();
 	}
 }
