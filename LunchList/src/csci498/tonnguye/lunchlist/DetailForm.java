@@ -2,13 +2,14 @@ package csci498.tonnguye.lunchlist;
 
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.database.Cursor;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 
 public class DetailForm extends Activity {
@@ -19,6 +20,13 @@ public class DetailForm extends Activity {
 	RadioGroup types = null;
 	RestaurantHelper helper = null;
 	String restaurantId = null;
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(this).inflate(R.menu.details_option, menu);
+		
+		return(super.onCreateOptionsMenu(menu));
+	}
 	
 	@Override
 	public void onSaveInstanceState(Bundle state) {
