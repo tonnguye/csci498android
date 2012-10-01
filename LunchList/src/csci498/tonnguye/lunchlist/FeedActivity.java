@@ -27,6 +27,7 @@ public class FeedActivity extends ListActivity {
 		
 		if (state == null) {
 			state = new InstanceState();
+			state.task = new FeedTask(this);
 			state.task.execute(getIntent().getStringExtra(FEED_URL));
 			
 		}
