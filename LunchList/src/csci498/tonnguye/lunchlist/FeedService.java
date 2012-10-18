@@ -15,6 +15,7 @@ public class FeedService extends IntentService {
 	
 	public static final String EXTRA_URL = "csci498.tonnguye.lunchlist.EXTRA_URL";
 	public static final String EXTRA_MESSENGER = "csci498.tonnguye.lunchlist.EXTRA_MESSENGER";
+	
 	public FeedService() {
 		super("FeedService");
 	}
@@ -44,5 +45,5 @@ public class FeedService extends IntentService {
 			Log.w("LunchList", "Exception sending results to activity", e);
 		}
 	}
-
+	
 }
