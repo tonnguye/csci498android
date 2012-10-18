@@ -116,6 +116,7 @@ public class DetailForm extends Activity {
 	@Override
 	public void onPause() {
 		save();
+		locMgr.removeUpdates(onLocationChange);
 		
 		super.onPause();
 	}
