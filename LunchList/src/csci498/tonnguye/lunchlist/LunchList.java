@@ -115,7 +115,7 @@ public class LunchList extends ListActivity {
 			View row=inflater.inflate(R.layout.row, parent, false);
 			RestaurantHolder holder=new RestaurantHolder(row);
 			row.setTag(holder);
-			return(row);
+			return row;
 		}
 	}
 	
