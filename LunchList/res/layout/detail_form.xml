@@ -9,40 +9,35 @@
         android:stretchColumns="1" >
 
         <TableRow>
-
             <TextView android:text="Name:" />
-
             <EditText android:id="@+id/name" />
         </TableRow>
 
         <TableRow>
-
             <TextView android:text="Address:" />
-
             <EditText android:id="@+id/addr" />
         </TableRow>
 
         <TableRow>
-
             <TextView android:text="Type:" />
-
             <RadioGroup android:id="@+id/types" >
-
                 <RadioButton
                     android:id="@+id/take_out"
                     android:checked="true"
                     android:text="Take-Out" />
-
                 <RadioButton
                     android:id="@+id/sit_down"
                     android:text="Sit-Down" />
-
                 <RadioButton
                     android:id="@+id/delivery"
                     android:text="Delivery" />
             </RadioGroup>
         </TableRow>
-
+        
+        <TableRow>
+        	<TextView android:text = "Location:"/>
+			<TextView android:id = "@+id/location" android:text= "(not set)" />
+		</TableRow>
         <EditText
             android:id="@+id/notes"
             android:gravity="top"
@@ -56,11 +51,5 @@
             android:id="@+id/feed"
             android:hint="Feed URL" />
 
-        <Button
-            android:id="@+id/save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save" />
     </TableLayout>
-
 </ScrollView>
