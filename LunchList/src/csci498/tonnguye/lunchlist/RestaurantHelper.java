@@ -13,7 +13,7 @@ class RestaurantHelper extends SQLiteOpenHelper {
 	private static final String ALTER_TABLE_FEED = "ALTER TABLE restaurants ADD COLUMN feed TEXT";
 	private static final String ALTER_TABLE_LAT = "ALTER TABLE restaurants ADD COLUMN lat REAL";
 	private static final String ALTER_TABLE_LON = "ALTER TABLE restaurants ADD COLUMN lon REAL";
-	private static final String SELECT_ORDER_BY = "SELECT _id, name, address, type, notes, feed FROM restaurants ORDER BY ";
+	private static final String SELECT_ORDER_BY = "SELECT _id, name, address, type, notes, lat, lon FROM restaurants ORDER BY ";
 	private static final String SELECT_WHERE = "SELECT _id, name, address, type, notes, feed, lat, lon, FROM restaurants WHERE _ID=?";
 	
 	public RestaurantHelper(Context context) {
