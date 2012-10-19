@@ -38,12 +38,12 @@ class RestaurantHelper extends SQLiteOpenHelper {
 	}
 	
 	public Cursor getAll(String orderBy) {
-		return(getReadableDatabase().rawQuery(SELECT_ORDER_BY + orderBy, null));
+		return getReadableDatabase().rawQuery(SELECT_ORDER_BY + orderBy, null);
 	}
 
 	public Cursor getById(String id) {
 		String[] args = {id};
-		return(getReadableDatabase().rawQuery(SELECT_WHERE, args));
+		return getReadableDatabase().rawQuery(SELECT_WHERE, args);
 	}
 	
 	public void updateLocation(String id, double lat, double lon) {
@@ -81,20 +81,20 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		getWritableDatabase().update("restaurants", cv, "_ID=?", args);
 	}
 	
-	public String getFeed(Cursor c) {
-		return(c.getString(5));
-	}
 	public String getName(Cursor c) {
-		return(c.getString(1));
+		return c.getString(1);
 	}
 	public String getAddress(Cursor c) {
-		return(c.getString(2));
+		return c.getString(2);
 	}
 	public String getType(Cursor c) {
-		return(c.getString(3));
+		return c.getString(3);
 	}
 	public String getNotes(Cursor c) {
-		return(c.getString(4));
+		return c.getString(4);
+	}
+	public String getFeed(Cursor c) {
+		return c.getString(5);
 	}
 	public double getLatitude(Cursor c) {
 		return c.getDouble(6);

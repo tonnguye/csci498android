@@ -88,16 +88,17 @@ public class DetailForm extends Activity {
 			String type = null;
 			
 			switch (types.getCheckedRadioButtonId()) {
-			case R.id.sit_down:
-				type="sit_down";
-				break;
-			case R.id.take_out:
-				type="take_out";
-				break;
-			case R.id.delivery:
-				type="delivery";
-				break;
+				case R.id.sit_down:
+					type="sit_down";
+					break;
+				case R.id.take_out:
+					type="take_out";
+					break;
+				case R.id.delivery:
+					type="delivery";
+					break;
 			}
+			
 			if (restaurantId == null) {
 				helper.insert(name.getText().toString(),
 						address.getText().toString(), type,
