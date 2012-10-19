@@ -2,6 +2,7 @@ package csci498.tonnguye.lunchlist;
 
 import org.mcsoxford.rss.RSSFeed;
 import org.mcsoxford.rss.RSSReader;
+import org.mcsoxford.rss.RSSItem;
 
 import android.app.Activity;
 import android.app.IntentService;
