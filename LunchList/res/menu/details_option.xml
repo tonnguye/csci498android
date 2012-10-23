@@ -7,5 +7,6 @@
         android:title="RSS Feed"/>
     <item android:id="@+id/location"  
         android:title="Save Location"></item>
+    <item android:id="@+id/map" android:icon="@drawable/ic_menu_mapmode" android:title="Show"></item>
 
 </menu>
