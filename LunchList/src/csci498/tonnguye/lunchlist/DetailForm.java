@@ -169,6 +169,11 @@ public class DetailForm extends Activity {
 			
 			return true;
 		}
+		else if (item.getItemId() == R.id.map) {
+			locMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, onLocationChange);
+			
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 	
