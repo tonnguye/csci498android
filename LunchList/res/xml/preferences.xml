@@ -8,14 +8,14 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 		android:entries="@array/sort_names"
 		android:entryValues="@array/sort_clauses"
 		android:dialogTitle="Choose a sort order" />
-	<CheckBoxPreference 
-	    android:key="@string/alarm"
-	    android:title="@string/lunchAlarm"
-	    android:summary="@string/lunchSummary" />
-	<csci498.tonnguye.lunchlist.TimePreference
-	    android:key="alarm_time"
-	    android:title="@string/lunchTime"
-	    android:defaultValue="@string/defaultTime"
-	    anddroid:summary="@string/setTime"
-	    android:dependency="alarm" />
+	<CheckBoxPreference
+	    android:key="alarm"
+	    android:title="@string/lunch_alarm"
+		android:summary="@string/time_for_lunch" />
+	<apt.tutorial.TimePreference
+		android:key="alarm_time"
+		android:title="Lunch Alarm Time"
+		android:defaultValue="12:00"
+		android:summary="Set your desired time for the lunch alarm"
+		android:dependency="alarm" />
 </PreferenceScreen>

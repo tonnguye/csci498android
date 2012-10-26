@@ -2,10 +2,7 @@
 <resources>
     <string name="hello">Hello World</string>
     <string name="app_name">LunchList</string>
-    <string name="alarm">alarm</string>
-    <string name="lunchAlarm">Sound a Lunch Alarm</string>
-    <string name="lunchSummary">Check if you want to know when it is time for lunch</string>
-    <string name="alarmTime">alarm_time</string>
-    <string name="defaultTime">12:00</string>
-    <string name="setTime">Set your desired time for the lunch alarm</string>
+    <string name="lunchTime">It\'s time for lunch!</string>
+    <string name="lunch_alarm">Sound a Lunch Alarm</string>
+    <string name="time_for_lunch">Check if you want to know when it is time for lunch</string>
 </resources>
