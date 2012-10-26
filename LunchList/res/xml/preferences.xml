@@ -12,7 +12,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 	    android:key="alarm"
 	    android:title="@string/lunch_alarm"
 		android:summary="@string/time_for_lunch" />
-	<apt.tutorial.TimePreference
+	<csci498.tonnguye.lunchlist.TimePreference
 		android:key="alarm_time"
 		android:title="Lunch Alarm Time"
 		android:defaultValue="12:00"

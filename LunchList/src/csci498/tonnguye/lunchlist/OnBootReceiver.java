@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class OnBootReceiver extends BroadcastReceiver {
 	@Override
@@ -36,12 +37,11 @@ public class OnBootReceiver extends BroadcastReceiver {
 	
 	public static void cancelAlarm(Context ctxt) {
 		AlarmManager mgr = (AlarmManager)ctxt.getSystemService(Context.ALARM_SERVICE);
-		
 		mgr.cancel(getPendingIntent(ctxt));
 	}
 	
 	private static PendingIntent getPendingIntent(Context ctxt) {
-		Intent i = new Intent(ctxt, OnAlarmReceiver.class);
+		Intent i = new Intent(ctxt, OnAlarmRecevier.class);
 		
 		return PendingIntent.getBroadcast(ctxt, 0, i, 0);
 	}
