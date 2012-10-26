@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
 xmlns:android="http://schemas.android.com/apk/res/android">
 	<ListPreference
@@ -16,5 +17,5 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 	    android:title="@string/lunchTime"
 	    android:defaultValue="@string/defaultTime"
 	    anddroid:summary="@string/setTime"
-	    android:dependency="alarm" />"
+	    android:dependency="alarm" />
 </PreferenceScreen>
