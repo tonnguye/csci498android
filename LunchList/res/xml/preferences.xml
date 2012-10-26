@@ -13,7 +13,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 	    android:title="@string/lunchAlarm"
 	    android:summary="@string/lunchSummary" />
 	<csci498.tonnguye.lunchlist.TimePreference
-	    android:key="@string/alarmTime"
+	    android:key="alarm_time"
 	    android:title="@string/lunchTime"
 	    android:defaultValue="@string/defaultTime"
 	    anddroid:summary="@string/setTime"
