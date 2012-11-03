@@ -18,4 +18,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 		android:defaultValue="12:00"
 		android:summary="Set your desired time for the lunch alarm"
 		android:dependency="alarm" />
+	<CheckBoxPreference
+		android:key="use_notification"
+		android:title="@string/notification"
+		android:defaultValue="true"
+		android:summary="@string/check_box"
+		android:dependency="alarm" />
 </PreferenceScreen>
