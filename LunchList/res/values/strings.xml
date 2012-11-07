@@ -8,4 +8,5 @@
     <string name="check_status_bar">Check if you want a status bar icon at lunchtime, or uncheck for a full-screen notice</string>
     <string name="notification">Use a Notification</string>
     <string name="check_box">Check if you want a status bar icon at lunchtime, or uncheck for a full-screen notice</string>
+    <string name="empty">No restaurants</string>
 </resources>
