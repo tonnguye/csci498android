@@ -19,7 +19,7 @@ public class WidgetService extends IntentService {
 	@Override
 	public void onHandleIntent(Intent intent) {
 		ComponentName me = new ComponentName(this, AppWidget.class);
-		RemoteViews updateViews = new RemoteViews("csci498.tonnguye.lunclist", R.layout.widget);
+		RemoteViews updateViews = new RemoteViews("csci498.tonnguye.lunchlist", R.layout.widget);
 		RestaurantHelper helper = new RestaurantHelper(this);
 		AppWidgetManager mgr = AppWidgetManager.getInstance(this);
 		
