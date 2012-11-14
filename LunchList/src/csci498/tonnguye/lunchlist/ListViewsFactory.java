@@ -19,24 +19,24 @@ implements RemoteViewsFactory {
 		this.ctxt = ctxt;
 	}
 
-	@Override
+	//@Override
 	public void onCreate() {
 		helper = new RestaurantHelper(ctxt);
 		restaurants = helper.getReadableDatabase().rawQuery(SELECT_NAME, null);
 	}
 
-	@Override 
+	//@Override 
 	public void onDestroy() {
 		restaurants.close();
 		helper.close();
 	}
 
-	@Override
+	//@Override
 	public int getCount() {
 		return restaurants.getCount();
 	}
 
-	@Override
+	//@Override
 	public RemoteViews getViewAt(int position) {
 		RemoteViews row = new RemoteViews(ctxt.getPackageName(), R.layout.widget_row);
 
@@ -53,29 +53,29 @@ implements RemoteViewsFactory {
 		return row;
 	}
 
-	@Override
+	//@Override
 	public RemoteViews getLoadingView() {
 		return null;
 	}
 
-	@Override
+	//@Override
 	public int getViewTypeCount() {
 		return(1);
 	}
 
-	@Override 
+	//@Override 
 	public long getItemId(int position) {
 		restaurants.moveToPosition(position);
 
 		return restaurants.getInt(0);
 	}
 
-	@Override 
+	//@Override 
 	public boolean hasStableIds() {
 		return true;
 	}
 
-	@Override
+	//@Override
 	public void onDataSetChanged() {
 		//no-op
 	}
