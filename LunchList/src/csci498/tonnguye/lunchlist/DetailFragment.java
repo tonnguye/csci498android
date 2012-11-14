@@ -1,6 +1,7 @@
 package csci498.tonnguye.lunchlist;
 
 import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.location.Location;
@@ -37,23 +38,22 @@ public class DetailFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.detail_form);
 		
-		helper = new RestaurantHelper(getActivity());
-		locMgr = (LocationManager)getSystemService(LOCATION_SERVICE);
+		setHasOptionsMenu(true);
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		
-		location = (TextView)findViewById(R.id.location);
-		name = (EditText)findViewById(R.id.name);
-		address = (EditText)findViewById(R.id.addr);
-		notes = (EditText)findViewById(R.id.notes);
-		feed = (EditText)findViewById(R.id.feed);
-		types = (RadioGroup)findViewById(R.id.types);
+		locMgr = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
 		
-		restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
-		
-		if(restaurantId != null) {
-			load();
-		}
+		location = (TextView)getView().findViewById(R.id.location);
+		name = (EditText)getView().findViewById(R.id.name);
+		address = (EditText)getView().findViewById(R.id.addr);
+		notes = (EditText)getView().findViewById(R.id.notes);
+		feed = (EditText)getView().findViewById(R.id.feed);
+		types = (RadioGroup)getView().findViewById(R.id.types);
 	}
 	
 	@Override 
