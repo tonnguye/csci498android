@@ -68,10 +68,8 @@ public class LunchFragment extends ListFragment {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		new MenuInflater(getActivity()).inflate(R.menu.option, menu);
-		
-		return(super.onCreateOptionsMenu(menu));
 	}
 	
 	@Override
@@ -117,9 +115,9 @@ public class LunchFragment extends ListFragment {
 		
 		@Override
 		public View newView(Context ctxt, Cursor c,	ViewGroup parent) {
-			LayoutInflater inflater=getLayoutInflater();
+			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View row=inflater.inflate(R.layout.row, parent, false);
-			RestaurantHolder holder=new RestaurantHolder(row);
+			RestaurantHolder holder = new RestaurantHolder(row);
 			row.setTag(holder);
 			return row;
 		}
