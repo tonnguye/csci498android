@@ -30,6 +30,7 @@ public class LunchFragment extends ListFragment {
 	RestaurantHelper helper=null;
 	public final static String ID_EXTRA = "csci498.tonnguye.lunchlist._ID";
 	SharedPreferences prefs = null;
+	OnRestaurantListener listener;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,14 @@ public class LunchFragment extends ListFragment {
 		
 		i.putExtra(ID_EXTRA, String.valueOf(id));
 		startActivity(i);
+	}
+	
+	public interface OnRestaurantListener {
+		void onRestaurantSelected(long id);
+	}
+	
+	public void setOnRestaurantListener(OnRestaurantListener listener) {
+		this.listener = listener;
 	}
 	
 	class RestaurantAdapter extends CursorAdapter {
