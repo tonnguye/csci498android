@@ -36,9 +36,19 @@ public class DetailFragment extends Fragment {
 	double longitude = 0.0d;
 	private static final String ARG_REST_ID = "csci498.tonnguye.lunchlist.ARG_REST_ID";
 	
+	public static DetailFragment newInstance(long id) {
+		DetailFragment result = new DetailFragment();
+		Bundle args = new Bundle();
+		
+		args.putString(ARG_REST_ID, String.valueOf(id));
+		result.setArguments(args);
+		
+		return result;
+	}
+	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onCreate(Bundle state) {
+		super.onCreate(state);
 		
 		setHasOptionsMenu(true);
 	}
@@ -71,16 +81,6 @@ public class DetailFragment extends Fragment {
 		}
 	}
 	
-	public static DetailFragment newInstance(long id) {
-		DetailFragment result = new DetailFragment();
-		Bundle args = new Bundle();
-		
-		args.putString(ARG_REST_ID, String.valueOf(id));
-		result.setArguments(args);
-		
-		return result;
-	}
-	
 	@Override 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.detail_form, container, false);
@@ -108,7 +108,7 @@ public class DetailFragment extends Fragment {
 		latitude = getHelper().getLatitude(c);
 		longitude = getHelper().getLatitude(c);
 		
-		location.setText(String.valueOf(getHelper().getLatitude(c)) + ", " + String.valueOf(getHelper().getLongitude(c)));
+		location.setText(String.valueOf(latitude) + ", " + String.valueOf(longitude));
 		
 		c.close();
 	}
@@ -174,7 +174,7 @@ public class DetailFragment extends Fragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		new MenuInflater(getActivity()).inflate(R.menu.details_option, menu);
+		inflater.inflate(R.menu.details_option, menu);
 	}
 	
 	@Override
