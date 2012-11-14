@@ -34,7 +34,14 @@ public class LunchFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		
+		setHasOptionsMenu(true);
+	}
+	
+	@Override
+	public void onResume()
+	{
+		super.onResume();
 		
 		helper=new RestaurantHelper(getActivity());
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
