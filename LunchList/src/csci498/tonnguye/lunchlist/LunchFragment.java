@@ -59,12 +59,10 @@ public class LunchFragment extends ListFragment {
 		
 	private void initList() {
 		if (model != null) {
-			stopManagingCursor(model);
 			model.close();
 		}
 		
 		model = helper.getAll(prefs.getString("sort_order", "name"));
-		startManagingCursor(model);
 		adapter = new RestaurantAdapter(model);
 		setListAdapter(adapter);
 	}
@@ -92,9 +90,10 @@ public class LunchFragment extends ListFragment {
 	}
 	
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
+	public void onPause() {
 		helper.close();
+		
+		super.onPause();
 	}
 	
 	@Override
