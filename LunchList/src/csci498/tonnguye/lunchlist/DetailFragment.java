@@ -60,6 +60,7 @@ public class DetailFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.detail_form, container, false);
 	}
+	
 	private void load() {
 		Cursor c = helper.getById(restaurantId);
 		
@@ -85,13 +86,6 @@ public class DetailFragment extends Fragment {
 		location.setText(String.valueOf(helper.getLatitude(c)) + ", " + String.valueOf(helper.getLongitude(c)));
 		
 		c.close();
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		
-		helper.close();
 	}
 	
 	private void save() {
@@ -128,9 +122,22 @@ public class DetailFragment extends Fragment {
 	@Override
 	public void onPause() {
 		save();
+		helper.close();
 		locMgr.removeUpdates(onLocationChange);
 		
 		super.onPause();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		helper = new RestaurantHelper(getActivity());
+		restaurantId = getActivity().getIntent().getStringExtra(LunchList.ID_EXTRA);
+		
+		if (restaurantId != null) {
+			load();
+		}
 	}
 	
 	@Override
@@ -142,16 +149,6 @@ public class DetailFragment extends Fragment {
 		state.putString("notes", notes.getText().toString());
 		state.putInt("types", types.getCheckedRadioButtonId());
 		
-	}
-	
-	@Override
-	public void onRestoreInstanceState(Bundle state) {
-		super.onRestoreInstanceState(state);
-		//Can add getActivity() into it's own function!
-		name.setText(state.getString("name"));
-		address.setText(state.getString("address"));
-		notes.setText(state.getString("notes"));
-		types.check(state.getInt("type"));
 	}
 	
 	@Override
@@ -215,15 +212,15 @@ public class DetailFragment extends Fragment {
 	};
 	
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
+	public void onPrepareOptionsMenu(Menu menu) {
 		if (restaurantId == null) {
 			menu.findItem(R.id.location).setEnabled(false);
 			menu.findItem(R.id.map).setEnabled(false);
 		}
-		return super.onPrepareOptionsMenu(menu);
 	}
+	
 	private boolean isNetworkAvailable() {
-		ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(CONNECTIVITY_SERVICE);
+		ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo info = cm.getActiveNetworkInfo();
 		
 		return(info!=null);
