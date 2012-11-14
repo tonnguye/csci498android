@@ -20,9 +20,16 @@ public class LunchList extends FragmentActivity
 		}
 		
 		public void onRestaurantSelected(long id) {
-			Intent i = new Intent(this, DetailForm.class);
+			if (findViewById(R.id.details) == null)
+			{
+				Intent i = new Intent(this, DetailForm.class);
+				
+				i.putExtra(ID_EXTRA, String.valueOf(id));
+				startActivity(i);
+			}
+			else {
+				//ummm... I don't want to do stuff!
+			}
 			
-			i.putExtra(ID_EXTRA, String.valueOf(id));
-			startActivity(i);
 		}
 	}

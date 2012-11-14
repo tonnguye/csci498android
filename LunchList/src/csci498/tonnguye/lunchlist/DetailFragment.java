@@ -34,6 +34,7 @@ public class DetailFragment extends Fragment {
 	LocationManager locMgr = null;
 	double latitude = 0.0d;
 	double longitude = 0.0d;
+	private static final String ARG_REST_ID = "csci498.tonnguye.lunchlist.ARG_REST_ID";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,20 @@ public class DetailFragment extends Fragment {
 		notes = (EditText)getView().findViewById(R.id.notes);
 		feed = (EditText)getView().findViewById(R.id.feed);
 		types = (RadioGroup)getView().findViewById(R.id.types);
+		
+		Bundle args = getArguments();
+		
+		if (args != null) {
+			loadRestaurant(args.getString(ARG_REST_ID));
+		}
+	}
+	
+	public void loadRestaurant(String restaurantId) {
+		this.restaurantId = restaurantId;
+		
+		if (restaurantId != null) {
+			load();
+		}
 	}
 	
 	@Override 
