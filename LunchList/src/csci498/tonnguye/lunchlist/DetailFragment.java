@@ -71,6 +71,16 @@ public class DetailFragment extends Fragment {
 		}
 	}
 	
+	public static DetailFragment newInstance(long id) {
+		DetailFragment result = new DetailFragment();
+		Bundle args = new Bundle();
+		
+		args.putString(ARG_REST_ID, String.valueOf(id));
+		result.setArguments(args);
+		
+		return result;
+	}
+	
 	@Override 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.detail_form, container, false);
