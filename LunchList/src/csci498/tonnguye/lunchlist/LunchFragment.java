@@ -97,10 +97,9 @@ public class LunchFragment extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id) {
-		Intent i = new Intent(getActivity(), DetailForm.class);
-		
-		i.putExtra(ID_EXTRA, String.valueOf(id));
-		startActivity(i);
+		if (listener != null) {
+			listener.onRestaurantSelected(id);
+		}
 	}
 	
 	public interface OnRestaurantListener {
