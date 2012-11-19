@@ -4,9 +4,13 @@
     <item
         android:id="@+id/feed"
         android:icon="@drawable/ic_menu_friendslist"
-        android:title="RSS Feed"/>
+        android:title="@string/rss_feed"/>
     <item android:id="@+id/location"  
-        android:title="Save Location"></item>
-    <item android:id="@+id/map" android:icon="@drawable/ic_menu_mapmode" android:title="Show"></item>
+        android:title="@string/save_location"></item>
+    <item android:id="@+id/map" android:icon="@drawable/ic_menu_mapmode" 
+        android:title="Show"></item>
+    <item android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/ic_menu_help" />"
 
 </menu>
