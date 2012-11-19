@@ -3,11 +3,11 @@
 xmlns:android="http://schemas.android.com/apk/res/android">
 	<ListPreference
 		android:key="sort_order"
-		android:title="Sort Order"
+		android:title="@string/sort_order"
 		android:summary="Choose the order the list uses"
 		android:entries="@array/sort_names"
 		android:entryValues="@array/sort_clauses"
-		android:dialogTitle="Choose a sort order" />
+		android:dialogTitle="@string/choose_a_sort_order" />
 	<CheckBoxPreference
 	    android:key="alarm"
 	    android:title="@string/lunch_alarm"
@@ -24,4 +24,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 		android:defaultValue="true"
 		android:summary="@string/check_box"
 		android:dependency="alarm" />
+	<RingtonePreference
+	    android:key="alarm_ringtone"
+	    android:title="@string/alarm_ringtone"
+	    android:summary="Indicate the ringtone to play when it is lunchtime"
+	    android:showSilent="true"
+	    android:dependency="alarm" />
 </PreferenceScreen>
